@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-MDOCDATE=$(date "+%d %m %y" | sed '
+MDOCDATE=$(date "+%d %m %Y" | sed '
 s/\([0-9]*\) 01 \([0-9]*\)/\1 Janurary \2/
 s/\([0-9]*\) 02 \([0-9]*\)/\1 February \2/
 s/\([0-9]*\) 03 \([0-9]*\)/\1 March \2/
