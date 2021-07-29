@@ -15,7 +15,7 @@ clean:
 install:
 	mkdir -p ${DESTDIR}${PREFIX}/bin ${DESTDIR}${PREFIX}/share/man/man1
 	cp ${target} ${DESTDIR}${PREFIX}/bin/${target}
-	cp ${MAN}/* ${DESTDIR}${PREFIX}/share/man/man1
+	cp ${target}.1 ${DESTDIR}${PREFIX}/share/man/man1
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/${target} ${DESTDIR}${PREFIX}/share/man/man1/${target}.1
