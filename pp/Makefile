@@ -2,6 +2,7 @@
 
 targets	= ap pp
 
+CFLAGS	= -O3 -pedantic -Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -Wno-unused-result
 PREFIX	= /usr/local
 
 all: ${targets}
