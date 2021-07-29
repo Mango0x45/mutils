@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+
+MDOCDATE=$(date "+%d %m %y" | sed '
+s/\([0-9]*\) 01 \([0-9]*\)/\1 Janurary \2/
+s/\([0-9]*\) 02 \([0-9]*\)/\1 February \2/
+s/\([0-9]*\) 03 \([0-9]*\)/\1 March \2/
+s/\([0-9]*\) 04 \([0-9]*\)/\1 April \2/
+s/\([0-9]*\) 05 \([0-9]*\)/\1 May \2/
+s/\([0-9]*\) 06 \([0-9]*\)/\1 June \2/
+s/\([0-9]*\) 07 \([0-9]*\)/\1 July \2/
+s/\([0-9]*\) 08 \([0-9]*\)/\1 August \2/
+s/\([0-9]*\) 09 \([0-9]*\)/\1 September \2/
+s/\([0-9]*\) 10 \([0-9]*\)/\1 October \2/
+s/\([0-9]*\) 11 \([0-9]*\)/\1 November \2/
+s/\([0-9]*\) 12 \([0-9]*\)/\1 December \2/
+')
+
+git status --porcelain | while read -r FILE; do
+	[ "$(echo "$FILE" | cut -c 1)" != "D" ] && {
+		case "$FILE" in
+		*\.[1-7])
+			sed -i '/^\.Dd/s/.*/.Dd $Mdocdate: '"$MDOCDATE"' $/' "$FILE"
+			git add "$FILE"
+			;;
+		esac
+	}
+done
+exit 0
