@@ -17,6 +17,7 @@ s/\([0-9]*\) 12 \([0-9]*\)/\1 December \2/
 
 git status --porcelain | while read -r FILE; do
 	[ "$(echo "$FILE" | cut -c 1)" != "D" ] && {
+		FILE="$(echo "$FILE" | awk '{ print $2 }')"
 		case "$FILE" in
 		*\.[1-7])
 			sed -i '/^\.Dd/s/.*/.Dd $Mdocdate: '"$MDOCDATE"' $/' "$FILE"
