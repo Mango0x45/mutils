@@ -15,15 +15,21 @@ s/\([0-9]*\) 11 \([0-9]*\)/\1 November \2/
 s/\([0-9]*\) 12 \([0-9]*\)/\1 December \2/
 ')
 
-git status --porcelain | while read -r FILE; do
-	[ "$(echo "$FILE" | cut -c 1)" != "D" ] && {
+git status --porcelain | while IFS= read -r FILE; do
+	FIRST="$(echo "$FILE" | cut -c 1)"
+	case "$FIRST" in
+	' '|D)
+		continue
+		;;
+	*)
 		FILE="$(echo "$FILE" | awk '{ print $2 }')"
-		case "$FILE" in
-		*\.[1-7])
+		case "${FILE##*.}" in
+		[1-7])
 			sed -i '/^\.Dd/s/.*/.Dd $Mdocdate: '"$MDOCDATE"' $/' "$FILE"
 			git add "$FILE"
 			;;
 		esac
-	}
+		;;
+	esac
 done
 exit 0
