@@ -1,0 +1,25 @@
+.Dd $Mdocdate: 30 July 21 $
+.Dt AP 1 URM
+.Os mutils
+.Sh NAME
+.Nm ap
+.Nd append text to standard input
+.Sh SYNOPSIS
+.Nm
+.Op Ar text ...
+.Sh DESCRIPTION
+.Nm
+is a utility to append text to each line of standard input.
+The text to append standard input with is given via command line arguments in a
+similar fashion to the
+.Xr echo 1
+utility.
+.Sh EXAMPLES
+Print the contents of
+.Ar file1
+to the standard output with each line appened with a period:
+.Pp
+.Dl $ ap '.' <file1
+.Sh SEE ALSO
+.Xr echo 1 ,
+.Xr pp 1
