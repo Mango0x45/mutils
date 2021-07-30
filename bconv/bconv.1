@@ -12,7 +12,9 @@
 .Nm
 is a utility to scan input files or standard input if none are specified for
 hexadecimal, octal, and binary numbers and then convert them to decimal.
-Similarly to many unix utilities such as
+Similarly to many
+.Ux
+utilities such as
 .Xr cat 1 ,
 you can specify the special filename
 .Sq -
@@ -23,7 +25,7 @@ Any sequence of characters with the prefix
 .Sq 0x
 followed by the digits
 .Sq 0123456789abcdef
-are dedected as a hexadecimal number.
+are detected as a hexadecimal number.
 Likewise, the prefixes
 .Sq 0o
 and
@@ -59,7 +61,7 @@ Finally, there is also the
 .Fl p
 flag which acts similarly to the
 .Fl w
-flag but instead of using whitespace as a delimeter, it uses both whitespace and
+flag but instead of using whitespace as a delimiter, it uses both whitespace and
 punctuation.
 This can be useful if you want to convert mathematical expressions containing
 hexadecimal, octal, or binary numbers into decimal for use with a tool such as
