@@ -1,0 +1,41 @@
+.Dd $Mdocdate: 30 July 2021 $
+.Dt CENTER 1 URM
+.Os mutils
+.Sh NAME
+.Nm center
+.Nd center lines of text
+.Sh SYNOPSIS
+.Nm
+.Op Ar
+.Sh DESCRIPTION
+.Nm
+is a utility to center text.
+Functionally it is used almost identically to the
+.Xr cat 1
+utility besides the lack of any command line options.
+Each given file is read in succession or standard input if no files are
+specified with its contents being centered on the screen.
+If the special filename
+.Sq -
+is given, then input is read from standard input.
+.Pp
+The
+.Nm
+utility also has support for ANSI color escape sequences.
+This means that it is possible to center colored text on the screen without it
+being shifted to one side.
+.Sh EXAMPLES
+Output the contents of
+.Ar file1
+to the screen, but centered:
+.Pp
+.Dl $ center file1
+.Pp
+Print a calendar centered on the screen, but with date highlighting using GNU extensions:
+.Pp
+.Dl $ cal --color=always | center
+.Sh EXIT STATUS
+.Ex -std
+.Sh SEE ALSO
+.Xr cal 1 ,
+.Xr cat 1

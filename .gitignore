@@ -1,6 +1,7 @@
 .clang-format
 *.o
 
+center/center
 mkpass/mkpass
 pp/ap
 pp/pp
