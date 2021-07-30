@@ -7,13 +7,18 @@
 
 #include <gmp.h>
 
-#define CLEANUP print_bignum(0);
-#define EATSPACE \
-	while (isspace(*yytext)) \
+#define CLEANUP                                                                                    \
+	do {                                                                                       \
+		print_bignum(0);                                                                   \
+		yyterminate();                                                                     \
+	} while (0)
+
+#define EATSPACE                                                                                   \
+	while (isspace(*yytext))                                                                   \
 		putchar(*yytext++);
 
-#define EATPUNCT \
-	while (ispunct(*yytext) || isspace(*yytext)) \
+#define EATPUNCT                                                                                   \
+	while (ispunct(*yytext) || isspace(*yytext))                                               \
 		putchar(*yytext++);
 
 const char *argv0;
@@ -88,7 +93,7 @@ print_bignum(int base)
 	static mpz_t i; /* No need to initialize a new one every single time */
 	if (!base) {
 		mpz_clear(i);
-		exit(EXIT_SUCCESS);
+		return;
 	}
 
 	/* Skip over the 0[xob] prefix */
