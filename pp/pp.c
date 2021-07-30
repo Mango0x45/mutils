@@ -4,11 +4,12 @@
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdnoreturn.h>
 #include <string.h>
 
 const char *argv0;
 
-static void
+static noreturn void
 usage(void)
 {
 	fprintf(stderr, "%s: Missing oprand\n", argv0);
