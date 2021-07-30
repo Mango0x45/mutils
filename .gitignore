@@ -1,6 +1,8 @@
 .clang-format
+bconv/*.c
 *.o
 
+bconv/bconv
 center/center
 mkpass/mkpass
 pp/ap

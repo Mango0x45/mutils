@@ -1,0 +1,114 @@
+.Dd $Mdocdate: 30 July 2021 $
+.Dt BCONV 1 URM
+.Os mutils
+.Sh NAME
+.Nm bconv
+.Nd convert hexadecimal, octal, and binary numbers to decimal
+.Sh SYNOPSIS
+.Nm
+.Op Fl p | w
+.Op Ar
+.Sh DESCRIPTION
+.Nm
+is a utility to scan input files or standard input if none are specified for
+hexadecimal, octal, and binary numbers and then convert them to decimal.
+Similarly to many unix utilities such as
+.Xr cat 1 ,
+you can specify the special filename
+.Sq -
+in order to read from standard input.
+.Pp
+Hexadecimal, octal, and binary numbers are detected based on their prefix.
+Any sequence of characters with the prefix
+.Sq 0x
+followed by the digits
+.Sq 0123456789abcdef
+are dedected as a hexadecimal number.
+Likewise, the prefixes
+.Sq 0o
+and
+.Sq 0b
+are used to detect octal and binary numbers respectively.
+One thing that is important to note is that all matches are done
+case-insensitively.
+This means that both
+.Dq 0xABC
+and
+.Dq 0Xabc
+will be converted from hexadecimal to binary.
+By default,
+.Nm
+will convert any matching sequence of characters regardless of the spacing
+around them.
+This means that the string
+.Dq My username is Mango0x45
+would be converted to
+.Dq My username is Mango69 .
+In order to get around this, the
+.Fl w
+flag can be specified to only match numbers that are surrounded by whitespace.
+With the
+.Fl w
+flag specified the string
+.Dq Mango0x45
+would not be converted but the string
+.Dq 0x10 + 0x16
+would be converted to
+.Dq 16 + 22 .
+Finally, there is also the
+.Fl p
+flag which acts similarly to the
+.Fl w
+flag but instead of using whitespace as a delimeter, it uses both whitespace and
+punctuation.
+This can be useful if you want to convert mathematical expressions containing
+hexadecimal, octal, or binary numbers into decimal for use with a tool such as
+.Xr bc 1
+or
+.Xr dc 1 .
+.Pp
+If both the
+.Fl p
+and
+.Fl w
+flags are specified then whichever flag which was specified last will be used.
+.Pp
+In order to convert the numbers from one base to another,
+.Nm
+makes use of the GNU Multiple Precision Arithmetic Library
+.Pq GMP .
+This allows for extremely easy base conversions on arbitrarily large integers.
+.Sh OPTIONS
+.Bl -tag -width Ds
+.It Fl p
+Match numbers which are surrounded by either whitespace or punctuation.
+With this flag specified, the strings
+.Dq 0x10+0x16
+and
+.Dq I have 0o47 apples
+will match, but the string
+.Dq My username is Mango0x45
+will not.
+.It Fl w
+Match numbers which are surrounded by whitespace.
+With this flag specified, the string
+.Dq I have 0o47 apples
+will match, but the strings
+.Dq 0x10+0x16
+and
+.Dq My username is Mango0x45
+will not.
+.El
+.Sh EXAMPLES
+Calculate the results of some mathematical expressions containing hexadecimal
+numbers using the
+.Xr bc 1
+utility:
+.Pp
+.Dl $ printf \(aq0x10 + 0x16\en0xFF * 0xE\en\(aq | bconv -p | bc
+.Sh EXIT STATUS
+.Ex -std
+.Sh SEE ALSO
+.Xr bc 1 ,
+.Xr cat 1 ,
+.Xr dc 1
