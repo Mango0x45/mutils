@@ -24,21 +24,22 @@ die(const char *s)
 static int
 get_cols(void)
 {
-	if (!isatty(STDOUT_FILENO)) {
+	int cols;
+	if (isatty(STDOUT_FILENO)) {
+		struct winsize w;
+		if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1)
+			die("ioctl");
+		cols = w.ws_col;
+	}
+	else {
 		FILE *fp = popen("tput cols", "r");
 		if (!fp)
 			die("popen");
 
-		int cols;
 		fscanf(fp, "%d", &cols);
 		(void) pclose(fp);
-		return cols;
 	}
-
-	struct winsize w;
-	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1)
-		die("ioctl");
-	return w.ws_col;
+	return cols;
 }
 
 static size_t
