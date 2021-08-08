@@ -70,11 +70,11 @@ bin	0b[01]+
 <WFLAG>{spc}{bin}/{end}	{ EATSPACE; print_bignum(2); }
 
 	/* Attempt to match as much non-converted text as possible for performance reasons */
-<*>0x[^0-9a-f\n]+	ECHO;
-<*>0o[^0-7\n]+		ECHO;
-<*>0b[^01\n]+		ECHO;
-<*>.|\n			ECHO;
-<*>((0[^xob\n]|[^0\n])[^0\n]*)*[^0 \t\n[:punct:]]	ECHO;
+<*>0x[^0-9a-f\n]+	|
+0o[^0-7\n]+		|
+0b[^01\n]+		|
+.|\n			|
+((0[^xob\n]|[^0\n])[^0\n]*)*[^0 \t\n[:punct:]]	ECHO;
 
 <*><<EOF>>	CLEANUP;
 
