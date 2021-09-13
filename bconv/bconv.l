@@ -90,11 +90,9 @@ usage(void)
 void
 print_bignum(int base)
 {
-	static mpz_t i; /* No need to initialize a new one every single time */
-	if (!base) {
-		mpz_clear(i);
+	mpz_t i;
+	if (!base)
 		return;
-	}
 
 	/* Skip over the 0[xob] prefix */
 	yytext += 2;
