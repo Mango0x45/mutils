@@ -1,4 +1,4 @@
-.Dd $Mdocdate: 30 July 2021 $
+.Dd $Mdocdate: 14 September 2021 $
 .Dt BCONV 1 URM
 .Os mutils
 .Sh NAME
@@ -6,12 +6,17 @@
 .Nd convert hexadecimal, octal, and binary numbers to decimal
 .Sh SYNOPSIS
 .Nm
+.Op Fl b Ar base
 .Op Fl p | w
 .Op Ar
 .Sh DESCRIPTION
 .Nm
-is a utility to scan input files or standard input if none are specified for
-hexadecimal, octal, and binary numbers and then convert them to decimal.
+is a utility to scan input files or standard input if none are specified for hexadecimal, decimal,
+octal, and binary numbers and then convert them to the base specified by
+.Ar base
+or to decimal if the
+.Fl b
+flag is not provided.
 Similarly to many
 .Ux
 utilities such as
@@ -20,7 +25,7 @@ you can specify the special filename
 .Sq -
 in order to read from standard input.
 .Pp
-Hexadecimal, octal, and binary numbers are detected based on their prefix.
+Hexadecimal, decimal, octal, and binary numbers are detected based on their prefix.
 Any sequence of characters with the prefix
 .Sq 0x
 followed by the digits
@@ -31,8 +36,10 @@ Likewise, the prefixes
 and
 .Sq 0b
 are used to detect octal and binary numbers respectively.
-One thing that is important to note is that all matches are done
-case-insensitively.
+Any sequence of the digits
+.Sq 0123456789
+is matched as a decimal number.
+One thing that is important to note is that all matches are done case-insensitively.
 This means that both
 .Dq 0xABC
 and
@@ -40,8 +47,7 @@ and
 will be converted from hexadecimal to binary.
 By default,
 .Nm
-will convert any matching sequence of characters regardless of the spacing
-around them.
+will convert any matching sequence of characters regardless of the spacing around them.
 This means that the string
 .Dq My username is Mango0x45
 would be converted to
@@ -61,12 +67,10 @@ Finally, there is also the
 .Fl p
 flag which acts similarly to the
 .Fl w
-flag but instead of using whitespace as a delimiter, it uses both whitespace and
-punctuation.
-This can be useful if you want to convert mathematical expressions containing
-hexadecimal, octal, or binary numbers into decimal for use with a tool such as
-.Xr bc 1
-or
+flag but instead of using whitespace as a delimiter, it uses both whitespace and punctuation.
+This can be useful if you want to convert mathematical expressions containing hexadecimal, octal, or
+binary numbers into decimal for use with a tool such as
+.Xr bc 1 or
 .Xr dc 1 .
 .Pp
 If both the
@@ -82,6 +86,11 @@ makes use of the GNU Multiple Precision Arithmetic Library
 This allows for extremely easy base conversions on arbitrarily large integers.
 .Sh OPTIONS
 .Bl -tag -width Ds
+.It Fl p Ar base
+Convert the matched numbers to the base
+.Ar base
+instead of decimal.
+The base must be given as a positive integer between 1 and 64.
 .It Fl p
 Match numbers which are surrounded by either whitespace or punctuation.
 With this flag specified, the strings
