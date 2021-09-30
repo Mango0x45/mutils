@@ -15,19 +15,19 @@ void print_bday(struct tm);
 %option noyywrap
 %option nodefault
 
-spc	[[:space:]]*
+eq	[[:space:]]*=[[:space:]]*
 
 %%
 
 	/* Trailing context ensures that the regex matches */
-name{spc}={spc}[^ ]*/.*		name = strdup(yytext + 5);
+name{eq}[^ ]*/.*	name = strdup(yytext + 5);
 
-birthday{spc}={spc}[0-9]{4}.*	{ struct tm date; strptime(yytext + 9, "%Y-%m-%d", &date);
-					print_bday(date); }
-birthday{spc}={spc}--.*		{ struct tm date; strptime(yytext + 11, "%m-%d", &date);
-					date.tm_year = 0; print_bday(date); }
+birthday{eq}[0-9]{4}.*	{ struct tm date; strptime(yytext + 9, "%Y-%m-%d", &date);
+				print_bday(date); }
+birthday{eq}--.*	{ struct tm date; strptime(yytext + 11, "%m-%d", &date);
+				date.tm_year = 0; print_bday(date); }
 
-^\n			free(name);
+^\n	free(name);
 .*|\n	;
 
 %%
