@@ -1,18 +1,18 @@
 #!/usr/bin/env sh
 
 MDOCDATE=$(date "+%d %m %Y" | sed '
-s/\([0-9]*\) 01 \([0-9]*\)/\1 Janurary \2/
-s/\([0-9]*\) 02 \([0-9]*\)/\1 February \2/
-s/\([0-9]*\) 03 \([0-9]*\)/\1 March \2/
-s/\([0-9]*\) 04 \([0-9]*\)/\1 April \2/
-s/\([0-9]*\) 05 \([0-9]*\)/\1 May \2/
-s/\([0-9]*\) 06 \([0-9]*\)/\1 June \2/
-s/\([0-9]*\) 07 \([0-9]*\)/\1 July \2/
-s/\([0-9]*\) 08 \([0-9]*\)/\1 August \2/
-s/\([0-9]*\) 09 \([0-9]*\)/\1 September \2/
-s/\([0-9]*\) 10 \([0-9]*\)/\1 October \2/
-s/\([0-9]*\) 11 \([0-9]*\)/\1 November \2/
-s/\([0-9]*\) 12 \([0-9]*\)/\1 December \2/
+s/ 01/ Janurary/
+s/ 02/ February/
+s/ 03/ March/
+s/ 04/ April/
+s/ 05/ May/
+s/ 06/ June/
+s/ 07/ July/
+s/ 08/ August/
+s/ 09/ September/
+s/ 10/ October/
+s/ 11/ November/
+s/ 12/ December/
 ')
 
 git status --porcelain | while IFS= read -r FILE; do
