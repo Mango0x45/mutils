@@ -1,8 +1,10 @@
 .clang-format
 bconv/*.c
+bdays/*.c
 *.o
 
 bconv/bconv
+bdays/bdays
 center/center
 mkpass/mkpass
 pp/ap

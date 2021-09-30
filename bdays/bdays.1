@@ -1,0 +1,57 @@
+.Dd $Mdocdate: 01 October 2021 $
+.Dt BDAYS 1 URM
+.Os mutils
+.Sh NAME
+.Nm bdays
+.Nd annouce everyones birthdays
+.Sh SYNOPSIS
+.Nm
+.Op Ar
+.Sh DESCRIPTION
+The
+.Nm
+utility announces the birthdays of anyone in your
+.Xr abook 1
+address book who is currently celebrating their birthday.
+This can however just be any other birthday database file written in TOML format.
+.Pp
+The format of the address book is expected to be as follows:
+.Pp
+.Bd -literal -offset indent -compact
+# Note that the date format is yyyy-mm-dd
+# To do this in abook(1) add the line 'field birthday = Birthday, date' to your config
+name = Foo Bar
+birthday = 2002-12-25
+
+# Or if you do not save the year of birth
+name = Foo Bar
+birthday = --12-25
+.Ed
+.Pp
+It does not matter if there is anything in\-between the name and birthday, however it is important
+that the birthday comes after the name.
+By default
+.Nm
+will attempt to read the address book from standard input, however as with many other
+.Ux
+utilities you can specify the file(s) to read as command\-line arguments.
+If the filename
+.Sq -
+is given then standard input will be read.
+.Sh EXAMPLES
+Print out all the current birthdays when you open a shell in bold text:
+.Pp
+.Bd -literal -offset indent -compact
+#!/bin/sh
+
+# Your .bashrc or similar depending on your shell
+
+tput bold
+bdays $XDG_DATA_HOME/abook/addressbook
+tput sgr0 # End bold
+.Ed
+.Sh EXIT STATUS
+.Ex -std
+.Sh SEE ALSO
+.Xr abook 1 ,
+.Xr tput 1
