@@ -56,7 +56,6 @@ print_bday(struct tm date)
 				break;
 			default:
 				age_suf = "th";
-				break;
 			}
 
 			printf("It's %s%s %d%s birthday today!\n", name, name_suf, age, age_suf);
