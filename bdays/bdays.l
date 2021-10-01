@@ -5,6 +5,7 @@
 #include <time.h>
 
 char *name;
+int retval;
 struct tm *today;
 
 /* The compiler complains about this missing */
@@ -36,6 +37,8 @@ void
 print_bday(struct tm date)
 {
 	if (date.tm_mon == today->tm_mon && date.tm_mday == today->tm_mday) {
+		retval = 0;
+
 		char *s = name;
 		while (*++s) {} /* Get to the end of name */
 		char *name_suf = (s[-1] == 's') ? "'" : "'s";
@@ -68,6 +71,8 @@ print_bday(struct tm date)
 int
 main(int argc, char **argv)
 {
+	retval = 1;
+
 	time_t t = time(NULL);
 	today = localtime(&t);
 
@@ -82,7 +87,7 @@ main(int argc, char **argv)
 			FILE *fp = fopen(*argv, "r");
 			if (!fp) {
 				perror(*argv);
-				exit(EXIT_FAILURE);
+				exit(2);
 			}
 
 			yyrestart(fp);
@@ -91,5 +96,5 @@ main(int argc, char **argv)
 		}
 	}
 
-	return EXIT_SUCCESS;
+	return retval;
 }

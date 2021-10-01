@@ -51,7 +51,14 @@ bdays $XDG_DATA_HOME/abook/addressbook
 tput sgr0 # End bold
 .Ed
 .Sh EXIT STATUS
-.Ex -std
+.Bl -tag -width Ds
+.It 0
+An ongoing birthday was found
+.It 1
+No ongoing birthdays were found
+.It 2
+An error occured while trying to read a file
+.El
 .Sh SEE ALSO
 .Xr abook 1 ,
 .Xr tput 1
