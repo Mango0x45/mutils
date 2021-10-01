@@ -77,7 +77,7 @@ center(FILE *fp, const int col, regex_t *re)
 		int extra = tabs * 8 - tabs;
 		olen += extra;
 		size_t len = olen - strlen_no_escapes(line, re) + extra;
-		int pad = (len + col + (olen - len) * 2) / 2;
+		int pad = (len + col + (olen - len) * 2) / 2 + 1;
 
 		printf("%*s", pad, line);
 	}
