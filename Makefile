@@ -1,4 +1,5 @@
 all:
+nice
 
 .PHONY: check-man hook
 check-man:
