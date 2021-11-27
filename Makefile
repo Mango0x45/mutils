@@ -10,3 +10,5 @@ check-man:
 
 hook:
 	[ -e .git/hooks/pre-commit ] || ln pre-commit .git/hooks/pre-commit
+
+# Hello from Anna
